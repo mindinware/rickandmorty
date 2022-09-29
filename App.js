@@ -26,18 +26,34 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import  Home  from "./screens/Home"
-import  Detail  from "./screens/Detail"
-
-const Stack = createNativeStackNavigator();
-
-const App = () => {
+import { createStackNavigator } from '@react-navigation/stack';
+import Home  from "./screens/Home"
+ 
+function App() {
   return (
     <NavigationContainer>
       <Home/>
     </NavigationContainer>
   );
 }
+
+const styles = StyleSheet.create({
+  sectionContainer: {
+    marginTop: 32,
+    paddingHorizontal: 24,
+  },
+  sectionTitle: {
+    fontSize: 24,
+    fontWeight: '600',
+  },
+  sectionDescription: {
+    marginTop: 8,
+    fontSize: 18,
+    fontWeight: '400',
+  },
+  highlight: {
+    fontWeight: '700',
+  },
+});
 
 export default App;
