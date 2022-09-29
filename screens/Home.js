@@ -1,7 +1,6 @@
-import React from 'react';
-import { Button,Text,Image,View,SafeAreaView, StyleSheet, TextInput,ScrollView,TouchableOpacity,Modal} from 'react-native';
+import React, { useRef } from "react";
+import { Button,Text,Image,View,SafeAreaView, StyleSheet, TextInput,ScrollView,TouchableOpacity,Modal,Animated} from 'react-native';
 import { NavigationScreenProps } from "react-navigation";
-import  Detail  from "./Detail"
 
 class Home extends React.Component{ 
 
@@ -13,8 +12,8 @@ class Home extends React.Component{
       name: "",
       haveNextPage: false,
       character:[],
-      selected:{image:"",name:""},
-      visible:true,
+      selected:{image:"",name:"",gender:"",episode:[]},
+      visible:false,
     }; 
 
     this.getCharacter = this.getCharacter.bind(this);
@@ -62,14 +61,24 @@ class Home extends React.Component{
           }
           </ScrollView>
         </SafeAreaView>
-        <Modal transparent={false} visible={this.state.visible}>
+        <Modal transparent={false} visible={this.state.visible} animationType="fade">
           <View style={{marginLeft:20,marginRight:20,marginTop:50,marginBottom:150}}>
             <TouchableOpacity style={{backgroundColor:"#3333ff",borderWidth:1,borderColor:"#3333ff",width:35,height:40,borderRadius:10}} onPress={() =>this.setState({visible:!this.state.visible})}><Text style={{textAlign:"center",marginTop:7,color:"#fff",fontWeight:"bold",fontSize:20}}>{"<-"}</Text></TouchableOpacity>
             <View style={{borderBottomWidth:2,borderBottomColor:"#eaeaea",marginTop:8}}></View>
             <SafeAreaView>
-              <ScrollView>
-                <Image style={{width:100,height:100,marginTop:10}} source={{uri:_this.state.selected.image}} />
-                <Text style={{fontSize:20,margin:10}}>{_this.state.selected.name}</Text>
+              <ScrollView style={{textAlign:"center"}} horizontal={false}>
+                <Text style={{fontSize:30,margin:10,textAlign:"center"}}>{_this.state.selected.name}</Text>
+                <Image style={{width:"100%",height:200,marginTop:10}} source={{uri:_this.state.selected.image}} />
+                <Text style={{fontSize:20,margin:10,textAlign:"center"}}>Genero: {_this.state.selected.gender}</Text>
+                <Text style={{fontSize:20,margin:10,textAlign:"center"}}>Capitulos en los que aparece:</Text>
+                <View style={{textAlign:"center"}}>
+                {_this.state.selected.episode.map((item,index) =>{
+                    return(
+                        <Text style={{fontSize:20,margin:10,textAlign:"center"}}>{item.replace("https://rickandmortyapi.com/api/","").replace("episode/", "Episodio ")}</Text>
+                    )
+                  })
+                }
+                </View>
               </ScrollView>
             </SafeAreaView>
           </View>
